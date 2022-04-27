@@ -1,0 +1,26 @@
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: black;
+    line-height: 20px;
+    padding: 5px;
+}
+
+
+.nav-container a {
+    text-decoration: none;
+    margin: 10px;
+    font-size: 25px;
+    color: white;
+    padding: 5px;
+
+}
+
+.nav-container a:hover {
+    background-color: slateblue;
+    padding: 10px;
+}
+
+ 

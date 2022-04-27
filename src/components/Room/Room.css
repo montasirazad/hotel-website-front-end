@@ -1,0 +1,8 @@
+.room-div img{
+height: 200px;
+}
+
+.room-div {
+    border: 2px solid blue;
+    padding: 5px;
+}
