@@ -13,6 +13,10 @@ const useFirebase = () => {
 
     const [user, setUser] = useState({});
     const [error, setError] = useState('');
+    const [loggedInUser, setLoggedInUser] = useState({
+        name: '',
+        email: ''
+    });
     const navigate = useNavigate();
     const location = useLocation();
     const auth = getAuth();
@@ -28,7 +32,14 @@ const useFirebase = () => {
                 setUser(user);
                 const destination = location.state.from || '/'
                 navigate(destination)
-                // console.log(user);
+                
+                const newUser = {
+                    name: user.displayName,
+                    email: user.email
+                };
+                console.log(newUser);
+                setLoggedInUser(newUser)
+
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
@@ -62,6 +73,7 @@ const useFirebase = () => {
 
     return {
         user,
+        loggedInUser,
         googleLogIn,
         googleLogOut,
         error

@@ -1,12 +1,15 @@
-import Button from '@mui/material/Button';
+import React, { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import '../../App.css';
+import useAuth from '../Hooks/useAuth';
 // MU imports /// 
 import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import '../../App.css';
+import Button from '@mui/material/Button';
+
+
 
 
 
@@ -16,9 +19,12 @@ const Booking = () => {
         checkInDate: new Date(),
         checkOutDate: new Date()
     })
-   
+
+    const { loggedInUser } = useAuth()
 
     const { title } = useParams();
+
+    const roomType = { roomTitle: title };
 
     const handleCheckInDate = date => {
         const newDate = { ...selectedDate }
@@ -32,11 +38,23 @@ const Booking = () => {
         setSelectedDate(newDate);
     }
     const handleBooking = () => {
-        console.log(selectedDate);
+        const newBooking = { ...loggedInUser, ...roomType, ...selectedDate }
+        fetch('http://localhost:7000/add-booking', {
+            method: 'post',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(newBooking)
+        })
+            .then(res => res.json())
+            .then(data=>{
+                if (data.acknowledged) {
+                   alert('Room booked successfully')
+                }
+            })
+        console.log(newBooking);
     }
     return (
         <div className='App'>
-            
+
             <h3>Thanks for choosing {title}</h3>
             <Link to='/'><p>Want another room ...?</p></Link> <br /><br />
 
