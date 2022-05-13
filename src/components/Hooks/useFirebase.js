@@ -37,7 +37,7 @@ const useFirebase = () => {
                     name: user.displayName,
                     email: user.email
                 };
-                console.log(newUser);
+                console.log();
                 setLoggedInUser(newUser)
 
             }).catch((error) => {

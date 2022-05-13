@@ -8,6 +8,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import Button from '@mui/material/Button';
+import AllBooking from '../AllBooking/AllBooking';
 
 
 
@@ -45,9 +46,9 @@ const Booking = () => {
             body: JSON.stringify(newBooking)
         })
             .then(res => res.json())
-            .then(data=>{
+            .then(data => {
                 if (data.acknowledged) {
-                   alert('Room booked successfully')
+                    alert('Room booked successfully')
                 }
             })
         console.log(newBooking);
@@ -79,6 +80,8 @@ const Booking = () => {
             </LocalizationProvider> <br /> <br />
 
             <Button onClick={handleBooking} variant="outlined" color="primary" size="large">BOOK NOW </Button>
+
+            <AllBooking />
         </div>
     );
 };
